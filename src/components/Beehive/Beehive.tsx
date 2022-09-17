@@ -11,29 +11,24 @@ const initialState = [
 ];
 
 export const Beehive = () => {
-  const [beehive, setBeehive] = useState(initialState);
+  const [shouldReset, setShouldReset] = useState(false);
 
-  const resetBeehive = () => setBeehive(initialState);
-
-  const handleBeeHealth = (beeIndex: number) => (reduction: number) =>
-    setBeehive((prevBeehive) => {
-      const newBeehive = structuredClone(prevBeehive);
-      newBeehive[beeIndex].health -= reduction;
-
-      return newBeehive;
-    });
+  const resetBeeHealth = () => setShouldReset(true);
 
   return (
     <div className="beehive">
-      <button className="beehive__reset" onClick={resetBeehive}>
-        Reset
-      </button>
+      <div className="beehive__reset">
+        <button className="beehive__reset-button" onClick={resetBeeHealth}>
+          Reset
+        </button>
+      </div>
       <section className="beehive__container">
-        {beehive.map(({ health }, beeIndex) => (
+        {initialState.map(({ health }, beeIndex) => (
           <Bee
             key={beeIndex.toString()}
             health={health}
-            setBeeHealth={handleBeeHealth(beeIndex)}
+            setShouldReset={setShouldReset}
+            shouldReset={shouldReset}
           />
         ))}
       </section>

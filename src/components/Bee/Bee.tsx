@@ -1,28 +1,40 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 import beeImage from "../../assets/bee.png";
 import "./Bee.scss";
 
 export type BeeProps = {
   health: number;
-  setBeeHealth: (reduction: number) => void;
+  setShouldReset: (val: boolean) => void;
+  shouldReset: boolean;
 };
 
-export const Bee: React.FC<BeeProps> = ({ health, setBeeHealth }) => {
+export const Bee: React.FC<BeeProps> = ({
+  shouldReset,
+  setShouldReset,
+  health,
+}) => {
+  const [beeHealth, setBeeHealth] = useState(health);
   const [reduceHealthBy, setReduceHealthBy] = useState(0);
 
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const isBeeAlive = health > 0;
+  const isBeeAlive = beeHealth > 0;
 
   const handleReduceBeeHealth = () => {
-    setBeeHealth(reduceHealthBy);
+    setBeeHealth((prevHealth) => (prevHealth -= reduceHealthBy));
     setReduceHealthBy(0);
 
     if (inputRef.current !== null) {
       inputRef.current.value = "";
     }
   };
+
+  useEffect(() => {
+    if (shouldReset) {
+      setBeeHealth(health);
+      setShouldReset(false);
+    }
+  }, [shouldReset, setShouldReset, health]);
 
   return (
     <div className={classNames("bee", { "bee--dead": !isBeeAlive })}>
@@ -46,7 +58,7 @@ export const Bee: React.FC<BeeProps> = ({ health, setBeeHealth }) => {
       </div>
       <div className="bee__status">
         <div className="bee__status-health">
-          <span>{isBeeAlive ? `${health}%` : 0}</span>
+          <span>{isBeeAlive ? `${beeHealth}%` : 0}</span>
         </div>
         <div className="bee__status-live">
           <span className="bee__status-live-text">
