@@ -5,15 +5,10 @@ import "./Bee.scss";
 
 export type BeeProps = {
   health: number;
-  setShouldReset: (val: boolean) => void;
-  shouldReset: boolean;
+  resetBeeHealth: () => void;
 };
 
-export const Bee: React.FC<BeeProps> = ({
-  shouldReset,
-  setShouldReset,
-  health,
-}) => {
+export const Bee: React.FC<BeeProps> = ({ resetBeeHealth, health }) => {
   const [beeHealth, setBeeHealth] = useState(health);
   const [reduceHealthBy, setReduceHealthBy] = useState(0);
 
@@ -30,11 +25,8 @@ export const Bee: React.FC<BeeProps> = ({
   };
 
   useEffect(() => {
-    if (shouldReset) {
-      setBeeHealth(health);
-      setShouldReset(false);
-    }
-  }, [shouldReset, setShouldReset, health]);
+    setBeeHealth(health);
+  }, [health, resetBeeHealth]);
 
   return (
     <div className={classNames("bee", { "bee--dead": !isBeeAlive })}>

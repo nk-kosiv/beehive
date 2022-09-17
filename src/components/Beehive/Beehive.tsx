@@ -11,9 +11,9 @@ const initialState = [
 ];
 
 export const Beehive = () => {
-  const [shouldReset, setShouldReset] = useState(false);
+  const [, setShouldReset] = useState(false);
 
-  const resetBeeHealth = () => setShouldReset(true);
+  const resetBeeHealth = () => setShouldReset(prev => !prev);
 
   return (
     <div className="beehive">
@@ -27,8 +27,7 @@ export const Beehive = () => {
           <Bee
             key={beeIndex.toString()}
             health={health}
-            setShouldReset={setShouldReset}
-            shouldReset={shouldReset}
+            resetBeeHealth={resetBeeHealth}
           />
         ))}
       </section>
