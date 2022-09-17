@@ -19,7 +19,7 @@ export const Bee: React.FC<BeeProps> = ({ resetBeeHealth, health }) => {
     setBeeHealth((prevHealth) => (prevHealth -= reduceHealthBy));
     setReduceHealthBy(0);
 
-    if (inputRef.current !== null) {
+    if (inputRef.current) {
       inputRef.current.value = "";
     }
   };

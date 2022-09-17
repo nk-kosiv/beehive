@@ -2,18 +2,14 @@ import { useState } from "react";
 import { Bee } from "../Bee/Bee";
 import "./Beehive.scss";
 
-const initialState = [
-  { health: 100 },
-  { health: 100 },
-  { health: 100 },
-  { health: 100 },
-  { health: 100 },
-];
+type BeehiveProps = {
+  beehive: { health: number }[];
+};
 
-export const Beehive = () => {
+export const Beehive: React.FC<BeehiveProps> = ({ beehive }) => {
   const [, setShouldReset] = useState(false);
 
-  const resetBeeHealth = () => setShouldReset(prev => !prev);
+  const resetBeeHealth = () => setShouldReset((prev) => !prev);
 
   return (
     <div className="beehive">
@@ -23,7 +19,7 @@ export const Beehive = () => {
         </button>
       </div>
       <section className="beehive__container">
-        {initialState.map(({ health }, beeIndex) => (
+        {beehive.map(({ health }, beeIndex) => (
           <Bee
             key={beeIndex.toString()}
             health={health}
