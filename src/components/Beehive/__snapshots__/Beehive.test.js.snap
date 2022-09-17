@@ -31,6 +31,7 @@ exports[`Beehive component related tests Should render App 1`] = `
           <input
             class="bee__process-input"
             type="number"
+            value=""
           />
           <button
             class="bee__process-button"
@@ -73,6 +74,7 @@ exports[`Beehive component related tests Should render App 1`] = `
           <input
             class="bee__process-input"
             type="number"
+            value=""
           />
           <button
             class="bee__process-button"

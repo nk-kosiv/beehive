@@ -16,6 +16,7 @@ exports[`Bee component related tests Should render bee 1`] = `
       <input
         class="bee__process-input"
         type="number"
+        value=""
       />
       <button
         class="bee__process-button"
