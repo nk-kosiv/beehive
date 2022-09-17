@@ -7,10 +7,8 @@ import { Bee, BeeProps } from "./Bee";
 
 describe("Bee component related tests", () => {
   it("Should render bee", () => {
-    // const { container } = render(<Bee resetBees={function (reset: () => void): void {
-    //   throw new Error("Function not implemented.");
-    // } } />);
+    const { container } = render(<Bee health={100} resetBeeHealth={jest.fn()}  />);
 
-    // expect(container).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 });
