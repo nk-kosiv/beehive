@@ -7,7 +7,7 @@ type BeehiveProps = {
 };
 
 export const Beehive: React.FC<BeehiveProps> = ({ beehive }) => {
-  const [, setShouldReset] = useState(false);
+  const [shouldReset, setShouldReset] = useState(false);
 
   const resetBeeHealth = () => setShouldReset((prev) => !prev);
 
@@ -23,7 +23,7 @@ export const Beehive: React.FC<BeehiveProps> = ({ beehive }) => {
           <Bee
             key={beeIndex.toString()}
             health={health}
-            resetBeeHealth={resetBeeHealth}
+            shouldReset={shouldReset}
           />
         ))}
       </section>

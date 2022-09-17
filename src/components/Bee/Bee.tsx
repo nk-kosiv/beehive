@@ -1,43 +1,38 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import classNames from "classnames";
 import beeImage from "../../assets/bee.png";
 import "./Bee.scss";
 
 export type BeeProps = {
   health: number;
-  resetBeeHealth: () => void;
+  shouldReset: boolean;
 };
 
-export const Bee: React.FC<BeeProps> = ({ resetBeeHealth, health }) => {
+export const Bee: React.FC<BeeProps> = ({ shouldReset, health }) => {
   const [beeHealth, setBeeHealth] = useState(health);
-  const [reduceHealthBy, setReduceHealthBy] = useState(0);
-
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [reduceHealthNumber, setReduceHealthNumber] = useState<number | string>('');
+  
   const isBeeAlive = beeHealth > 0;
 
   const handleReduceBeeHealth = () => {
-    setBeeHealth((prevHealth) => (prevHealth -= reduceHealthBy));
-    setReduceHealthBy(0);
-
-    if (inputRef.current) {
-      inputRef.current.value = "";
-    }
+    setBeeHealth((prevHealth) => (prevHealth -= Number(reduceHealthNumber)));
+    setReduceHealthNumber('');
   };
 
   useEffect(() => {
     setBeeHealth(health);
-  }, [health, resetBeeHealth]);
+  }, [health, shouldReset]);
 
   return (
     <div className={classNames("bee", { "bee--dead": !isBeeAlive })}>
       <img className="bee__image" src={beeImage} alt="bee" />
       <div className="bee__process">
         <input
-          ref={inputRef}
+          value={reduceHealthNumber}
           className="bee__process-input"
           disabled={!isBeeAlive}
           type="number"
-          onChange={({ target }) => setReduceHealthBy(Number(target.value))}
+          onChange={({ target }) => setReduceHealthNumber(Number(target.value))}
           onKeyDown={(e) => e.key === "Enter" && handleReduceBeeHealth()}
         />
         <button
