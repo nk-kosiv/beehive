@@ -2,38 +2,28 @@ import { useState } from "react";
 import { Bee } from "../Bee/Bee";
 import "./Beehive.scss";
 
-const initialState = [
-  { health: 100 },
-  { health: 100 },
-  { health: 100 },
-  { health: 100 },
-  { health: 100 },
-];
+type BeehiveProps = {
+  beehive: { health: number }[];
+};
 
-export const Beehive = () => {
-  const [beehive, setBeehive] = useState(initialState);
+export const Beehive: React.FC<BeehiveProps> = ({ beehive }) => {
+  const [, setShouldReset] = useState(false);
 
-  const resetBeehive = () => setBeehive(initialState);
-
-  const handleBeeHealth = (beeIndex: number) => (reduction: number) =>
-    setBeehive((prevBeehive) => {
-      const newBeehive = structuredClone(prevBeehive);
-      newBeehive[beeIndex].health -= reduction;
-
-      return newBeehive;
-    });
+  const resetBeeHealth = () => setShouldReset((prev) => !prev);
 
   return (
     <div className="beehive">
-      <button className="beehive__reset" onClick={resetBeehive}>
-        Reset
-      </button>
+      <div className="beehive__reset">
+        <button className="beehive__reset-button" onClick={resetBeeHealth}>
+          Reset
+        </button>
+      </div>
       <section className="beehive__container">
         {beehive.map(({ health }, beeIndex) => (
           <Bee
             key={beeIndex.toString()}
             health={health}
-            setBeeHealth={handleBeeHealth(beeIndex)}
+            resetBeeHealth={resetBeeHealth}
           />
         ))}
       </section>
