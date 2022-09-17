@@ -1,14 +1,11 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { render, fireEvent, act } from "@testing-library/react";
+import { render } from "@testing-library/react";
 
 import { Beehive } from "./Beehive";
 
-// jest.mock('./hooks/s');
-
-describe("Bee component related tests", () => {
+describe("Beehive component related tests", () => {
   it("Should render bee", () => {
-    // const { container } = render(<Beehive />);
+    const { container } = render(<Beehive />);
 
-    // expect(container).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 });
