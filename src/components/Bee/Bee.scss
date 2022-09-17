@@ -1,0 +1,69 @@
+.bee {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  margin: 10px;
+  background-color: #fff;
+  border-radius: 20%;
+
+  &__image {
+    width: 100px;
+    padding: 5px;
+  }
+
+  &__process {
+    padding: 10px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+    &-input {
+      width: 65%;
+      padding: 5px;
+    }
+
+    &-button {
+      padding: 5px;
+    }
+  }
+
+  &__status {
+    display: flex;
+
+    &-live,
+    &-health {
+      text-align: center;
+      border: 1px solid #aeaeae;
+      padding: 3px;
+      width: 50px;
+    }
+
+    &-live {
+      background-color: rgb(178, 229, 178);
+    }
+
+    &-health {
+      background-color: rgb(232, 217, 217);
+    }
+  }
+
+  &--dead {
+    .bee__image {
+      filter: grayscale(1);
+    }
+
+    .bee__status {
+      display: flex;
+
+      &-live {
+        background-color: rgb(241, 68, 68);
+      }
+
+      &-health {
+        background-color: rgba(255, 255, 255, 0.109);
+      }
+    }
+  }
+}

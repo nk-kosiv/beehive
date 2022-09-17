@@ -1,0 +1,18 @@
+.beehive {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px;
+  width: 100%;
+
+  &__container {
+    background-color: rgb(241, 233, 217);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    width: 100%;
+  }
+}
